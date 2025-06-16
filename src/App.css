@@ -205,7 +205,7 @@ body {
   }
 }
 
-
+/* ================== 📺 TV ====================*/
 /* 📺 TV STATIC GLITCH EFFECTS 📺 */
 .glitch-text {
   position: relative;
@@ -215,6 +215,18 @@ body {
   overflow: visible;
   padding: 10px 0;
   margin: 10px 0;
+  /* Remove focus outline to prevent click issues */
+  outline: none;
+  user-select: none;
+  /* Prevent text selection */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/* Prevent focus state issues */
+.glitch-text:focus {
+  outline: none;
 }
 
 /* 📺 TV BAD SIGNAL ON HOVER 📺 */
@@ -247,109 +259,141 @@ body {
   content: attr(data-text);
   position: absolute;
   top: 0;
+  /* Keep at 0 */
   left: 0;
+  /* Keep at 0 */
   width: 100%;
   height: 100%;
   pointer-events: none;
   opacity: 0;
-  line-height: 1.1;
+  line-height: inherit;
+  /* Inherit line height from parent */
   white-space: pre-line;
   text-align: center;
-  overflow: hidden;
+  overflow: visible;
+  /* Fix z-index stacking */
+  z-index: -1;
+  /* Ensure proper text rendering */
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  word-spacing: inherit;
 }
 
 .glitch-text::before {
   animation: glitch-text-1 4s linear infinite;
   color: #ff0040;
-  z-index: -1;
+  z-index: -2;
+  /* Behind the main text */
 }
 
 .glitch-text::after {
   animation: glitch-text-2 4s linear infinite;
   color: #00ff41;
-  z-index: -2;
+  z-index: -3;
+  /* Behind the ::before element */
 }
 
-/* 📺 TV STATIC ANIMATIONS 📺 */
+/* 📺 TV STATIC ANIMATIONS - IMPROVED 📺 */
 @keyframes tv-signal-loss {
   0% {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    transform: translateY(0);
   }
 
   10% {
     clip-path: polygon(0 0, 100% 0, 100% 40%, 0 45%);
+    transform: translateY(0);
   }
 
   15% {
     clip-path: polygon(0 45%, 100% 40%, 100% 55%, 0 60%);
+    transform: translateY(0);
   }
 
   20% {
     clip-path: polygon(0 60%, 100% 55%, 100% 100%, 0 100%);
+    transform: translateY(0);
   }
 
   25% {
     clip-path: polygon(0 0, 100% 0, 100% 30%, 0 35%);
+    transform: translateY(0);
   }
 
   30% {
     clip-path: polygon(0 35%, 100% 30%, 100% 65%, 0 70%);
+    transform: translateY(0);
   }
 
   35% {
     clip-path: polygon(0 70%, 100% 65%, 100% 100%, 0 100%);
+    transform: translateY(0);
   }
 
   40% {
     clip-path: polygon(0 0, 100% 0, 100% 20%, 0 25%);
+    transform: translateY(0);
   }
 
   45% {
     clip-path: polygon(0 25%, 100% 20%, 100% 75%, 0 80%);
+    transform: translateY(0);
   }
 
   50% {
     clip-path: polygon(0 80%, 100% 75%, 100% 100%, 0 100%);
+    transform: translateY(0);
   }
 
   55% {
     clip-path: polygon(0 0, 100% 0, 100% 50%, 0 55%);
+    transform: translateY(0);
   }
 
   60% {
     clip-path: polygon(0 55%, 100% 50%, 100% 100%, 0 100%);
+    transform: translateY(0);
   }
 
   65% {
     clip-path: polygon(0 0, 100% 0, 100% 35%, 0 40%);
+    transform: translateY(0);
   }
 
   70% {
     clip-path: polygon(0 40%, 100% 35%, 100% 70%, 0 75%);
+    transform: translateY(0);
   }
 
   75% {
     clip-path: polygon(0 75%, 100% 70%, 100% 100%, 0 100%);
+    transform: translateY(0);
   }
 
   80% {
     clip-path: polygon(0 0, 100% 0, 100% 25%, 0 30%);
+    transform: translateY(0);
   }
 
   85% {
     clip-path: polygon(0 30%, 100% 25%, 100% 85%, 0 90%);
+    transform: translateY(0);
   }
 
   90% {
     clip-path: polygon(0 90%, 100% 85%, 100% 100%, 0 100%);
+    transform: translateY(0);
   }
 
   95% {
     clip-path: polygon(0 0, 100% 0, 100% 60%, 0 65%);
+    transform: translateY(0);
   }
 
   100% {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    transform: translateY(0);
   }
 }
 
@@ -359,7 +403,8 @@ body {
   }
 
   10% {
-    transform: translateX(-8px) scale(1.02);
+    transform: translateX(-4px) scale(1.02);
+    /* Reduced displacement */
   }
 
   20% {
@@ -447,9 +492,11 @@ body {
 
 @keyframes tv-scan-lines-1 {
   0% {
-    transform: translateX(-15px);
+    transform: translateX(-8px) translateY(0);
+    /* Added translateY(0) */
     clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
-    opacity: 0.9;
+    opacity: 0.7;
+    /* Reduced opacity */
   }
 
   25% {
@@ -479,9 +526,11 @@ body {
 
 @keyframes tv-scan-lines-2 {
   0% {
-    transform: translateX(12px);
+    transform: translateX(6px) translateY(0);
+    /* Added translateY(0) */
     clip-path: polygon(0 0, 100% 0, 100% 25%, 0 25%);
-    opacity: 0.8;
+    opacity: 0.6;
+    /* Reduced opacity */
   }
 
   20% {
@@ -585,41 +634,45 @@ body {
   }
 }
 
+/* Improved text animations with proper positioning */
 @keyframes glitch-text-1 {
 
   0%,
   85% {
-    transform: translate(0);
+    transform: translate(0, 0);
+    /* Always keep Y at 0 */
     opacity: 0;
   }
 
   86% {
-    opacity: 0.8;
+    opacity: 0.6;
+    /* Reduced opacity */
   }
 
   87% {
-    transform: translate(-1px, 1px);
-    opacity: 0.8;
+    transform: translate(-1px, 0);
+    /* No Y movement */
+    opacity: 0.6;
   }
 
   88% {
-    transform: translate(-1px, -1px);
-    opacity: 0.8;
+    transform: translate(-1px, 0);
+    opacity: 0.6;
   }
 
   89% {
-    transform: translate(1px, 1px);
-    opacity: 0.8;
+    transform: translate(1px, 0);
+    opacity: 0.6;
   }
 
   90% {
-    transform: translate(1px, -1px);
-    opacity: 0.8;
+    transform: translate(1px, 0);
+    opacity: 0.6;
   }
 
   91%,
   100% {
-    transform: translate(0);
+    transform: translate(0, 0);
     opacity: 0;
   }
 }
@@ -628,37 +681,40 @@ body {
 
   0%,
   88% {
-    transform: translate(0);
+    transform: translate(0, 0);
+    /* Always keep Y at 0 */
     opacity: 0;
   }
 
   89% {
-    opacity: 0.8;
+    opacity: 0.5;
+    /* Reduced opacity */
   }
 
   90% {
     transform: translate(1px, 0);
-    opacity: 0.8;
+    /* No Y movement */
+    opacity: 0.5;
   }
 
   91% {
     transform: translate(-1px, 0);
-    opacity: 0.8;
+    opacity: 0.5;
   }
 
   92% {
-    transform: translate(0, 1px);
-    opacity: 0.8;
+    transform: translate(0, 0);
+    opacity: 0.5;
   }
 
   93% {
-    transform: translate(0, -1px);
-    opacity: 0.8;
+    transform: translate(0, 0);
+    opacity: 0.5;
   }
 
   94%,
   100% {
-    transform: translate(0);
+    transform: translate(0, 0);
     opacity: 0;
   }
 }
