@@ -158,29 +158,87 @@ body {
   }
 }
 
-/* Enhanced text effects */
+/* 🎨 CUSTOM LOGO STYLING 🎨 */
+.logo-custom {
+  /* Make the background transparent */
+  background: transparent;
+  /* You can also add glitch effects to the logo */
+  transition: all 0.3s ease;
+}
+
+.logo-custom:hover {
+  /* Add subtle glitch effect to logo */
+  animation: logo-glitch 0.4s linear infinite;
+  filter:
+    drop-shadow(0 0 10px rgba(255, 0, 40, 0.6)) drop-shadow(0 0 15px rgba(0, 255, 0, 0.4));
+}
+
+@keyframes logo-glitch {
+  0% {
+    transform: scale(1.1) rotate(0deg);
+    filter:
+      drop-shadow(0 0 10px rgba(255, 0, 40, 0.6)) drop-shadow(0 0 15px rgba(0, 255, 0, 0.4));
+  }
+
+  25% {
+    transform: scale(1.15) rotate(-1deg);
+    filter:
+      drop-shadow(2px 2px 12px rgba(0, 255, 255, 0.7)) drop-shadow(-2px -2px 18px rgba(255, 0, 255, 0.5));
+  }
+
+  50% {
+    transform: scale(1.08) rotate(1deg);
+    filter:
+      drop-shadow(-1px 3px 14px rgba(255, 255, 0, 0.8)) drop-shadow(3px -1px 20px rgba(255, 0, 40, 0.6));
+  }
+
+  75% {
+    transform: scale(1.12) rotate(-0.5deg);
+    filter:
+      drop-shadow(1px -2px 16px rgba(0, 255, 0, 0.9)) drop-shadow(-3px 1px 22px rgba(0, 255, 255, 0.7));
+  }
+
+  100% {
+    transform: scale(1.1) rotate(0deg);
+    filter:
+      drop-shadow(0 0 10px rgba(255, 0, 40, 0.6)) drop-shadow(0 0 15px rgba(0, 255, 0, 0.4));
+  }
+}
+
+
+/* 📺 TV STATIC GLITCH EFFECTS 📺 */
 .glitch-text {
   position: relative;
   animation: text-flicker 4s linear infinite;
   transition: all 0.3s ease;
   cursor: pointer;
+  overflow: visible;
+  padding: 10px 0;
+  margin: 10px 0;
 }
 
-/* Hover effects for main title */
+/* 📺 TV BAD SIGNAL ON HOVER 📺 */
 .glitch-text:hover {
+  animation:
+    tv-signal-loss 0.4s linear infinite,
+    horizontal-displacement 0.2s linear infinite,
+    static-interference 0.1s linear infinite;
   transform: scale(1.02);
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-  animation: text-flicker-hover 0.3s linear infinite,
-    text-shake 0.1s linear infinite;
+  filter:
+    drop-shadow(0 0 15px rgba(255, 0, 40, 0.7)) drop-shadow(0 0 25px rgba(0, 255, 0, 0.5)) contrast(1.3) brightness(1.1);
 }
 
 .glitch-text:hover::before {
-  animation: glitch-text-hover-1 0.3s linear infinite;
+  animation:
+    tv-scan-lines-1 0.15s linear infinite,
+    horizontal-split-1 0.3s linear infinite;
   opacity: 1;
 }
 
 .glitch-text:hover::after {
-  animation: glitch-text-hover-2 0.3s linear infinite;
+  animation:
+    tv-scan-lines-2 0.2s linear infinite,
+    horizontal-split-2 0.25s linear infinite;
   opacity: 1;
 }
 
@@ -197,6 +255,7 @@ body {
   line-height: 1.1;
   white-space: pre-line;
   text-align: center;
+  overflow: hidden;
 }
 
 .glitch-text::before {
@@ -211,128 +270,292 @@ body {
   z-index: -2;
 }
 
-/* Hover animations for title */
-@keyframes text-flicker-hover {
-
-  0%,
-  20%,
-  40%,
-  60%,
-  80%,
-  100% {
-    text-shadow: -1px -1px 0 #ff0040, 1px 1px 0 #00ff41,
-      -1px 1px 0 #ffff00, 1px -1px 0 #ff0040,
-      0 0 15px rgba(255, 255, 255, 0.5);
-  }
-
-  10%,
-  30%,
-  50%,
-  70%,
-  90% {
-    text-shadow: 1px -1px 0 #ff0040, -1px 1px 0 #00ff41,
-      1px 1px 0 #ffff00, -1px -1px 0 #00ff41,
-      0 0 25px rgba(255, 255, 255, 0.8);
-  }
-}
-
-@keyframes text-shake {
+/* 📺 TV STATIC ANIMATIONS 📺 */
+@keyframes tv-signal-loss {
   0% {
-    transform: translate(0, 0) scale(1.02);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
   }
 
   10% {
-    transform: translate(-1px, 1px) scale(1.02);
+    clip-path: polygon(0 0, 100% 0, 100% 40%, 0 45%);
+  }
+
+  15% {
+    clip-path: polygon(0 45%, 100% 40%, 100% 55%, 0 60%);
   }
 
   20% {
-    transform: translate(1px, -1px) scale(1.02);
+    clip-path: polygon(0 60%, 100% 55%, 100% 100%, 0 100%);
+  }
+
+  25% {
+    clip-path: polygon(0 0, 100% 0, 100% 30%, 0 35%);
   }
 
   30% {
-    transform: translate(-1px, -1px) scale(1.02);
+    clip-path: polygon(0 35%, 100% 30%, 100% 65%, 0 70%);
+  }
+
+  35% {
+    clip-path: polygon(0 70%, 100% 65%, 100% 100%, 0 100%);
   }
 
   40% {
-    transform: translate(1px, 1px) scale(1.02);
+    clip-path: polygon(0 0, 100% 0, 100% 20%, 0 25%);
+  }
+
+  45% {
+    clip-path: polygon(0 25%, 100% 20%, 100% 75%, 0 80%);
   }
 
   50% {
-    transform: translate(-1px, 0px) scale(1.02);
+    clip-path: polygon(0 80%, 100% 75%, 100% 100%, 0 100%);
+  }
+
+  55% {
+    clip-path: polygon(0 0, 100% 0, 100% 50%, 0 55%);
   }
 
   60% {
-    transform: translate(1px, 0px) scale(1.02);
+    clip-path: polygon(0 55%, 100% 50%, 100% 100%, 0 100%);
+  }
+
+  65% {
+    clip-path: polygon(0 0, 100% 0, 100% 35%, 0 40%);
   }
 
   70% {
-    transform: translate(0px, -1px) scale(1.02);
+    clip-path: polygon(0 40%, 100% 35%, 100% 70%, 0 75%);
+  }
+
+  75% {
+    clip-path: polygon(0 75%, 100% 70%, 100% 100%, 0 100%);
   }
 
   80% {
-    transform: translate(0px, 1px) scale(1.02);
+    clip-path: polygon(0 0, 100% 0, 100% 25%, 0 30%);
+  }
+
+  85% {
+    clip-path: polygon(0 30%, 100% 25%, 100% 85%, 0 90%);
   }
 
   90% {
-    transform: translate(-1px, 1px) scale(1.02);
+    clip-path: polygon(0 90%, 100% 85%, 100% 100%, 0 100%);
+  }
+
+  95% {
+    clip-path: polygon(0 0, 100% 0, 100% 60%, 0 65%);
   }
 
   100% {
-    transform: translate(0, 0) scale(1.02);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
   }
 }
 
-@keyframes glitch-text-hover-1 {
+@keyframes horizontal-displacement {
   0% {
-    transform: translate(-2px, 2px);
-    opacity: 0.8;
+    transform: translateX(0) scale(1.02);
   }
 
-  25% {
-    transform: translate(2px, -2px);
-    opacity: 0.9;
+  10% {
+    transform: translateX(-8px) scale(1.02);
+  }
+
+  20% {
+    transform: translateX(12px) scale(1.02);
+  }
+
+  30% {
+    transform: translateX(-5px) scale(1.02);
+  }
+
+  40% {
+    transform: translateX(15px) scale(1.02);
   }
 
   50% {
-    transform: translate(-1px, -1px);
-    opacity: 0.8;
+    transform: translateX(-10px) scale(1.02);
   }
 
-  75% {
-    transform: translate(1px, 2px);
-    opacity: 0.9;
+  60% {
+    transform: translateX(7px) scale(1.02);
+  }
+
+  70% {
+    transform: translateX(-3px) scale(1.02);
+  }
+
+  80% {
+    transform: translateX(20px) scale(1.02);
+  }
+
+  90% {
+    transform: translateX(-12px) scale(1.02);
   }
 
   100% {
-    transform: translate(-2px, 1px);
+    transform: translateX(0) scale(1.02);
+  }
+}
+
+@keyframes static-interference {
+  0% {
+    text-shadow:
+      0 0 0 rgba(255, 255, 255, 0);
+    filter: blur(0px);
+  }
+
+  20% {
+    text-shadow:
+      -2px 0 0 #ff0040,
+      2px 0 0 #00ff41,
+      0 0 10px rgba(255, 255, 255, 0.3);
+    filter: blur(0.5px);
+  }
+
+  40% {
+    text-shadow:
+      3px 0 0 #ff0040,
+      -3px 0 0 #00ff41,
+      0 0 15px rgba(255, 255, 255, 0.5);
+    filter: blur(1px);
+  }
+
+  60% {
+    text-shadow:
+      -1px 0 0 #00ff41,
+      1px 0 0 #ff0040,
+      0 0 8px rgba(255, 255, 255, 0.2);
+    filter: blur(0.3px);
+  }
+
+  80% {
+    text-shadow:
+      4px 0 0 #ff0040,
+      -4px 0 0 #00ff41,
+      0 0 20px rgba(255, 255, 255, 0.6);
+    filter: blur(1.5px);
+  }
+
+  100% {
+    text-shadow:
+      0 0 0 rgba(255, 255, 255, 0);
+    filter: blur(0px);
+  }
+}
+
+@keyframes tv-scan-lines-1 {
+  0% {
+    transform: translateX(-15px);
+    clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+    opacity: 0.9;
+  }
+
+  25% {
+    transform: translateX(20px);
+    clip-path: polygon(0 33%, 100% 33%, 100% 66%, 0 66%);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: translateX(-10px);
+    clip-path: polygon(0 66%, 100% 66%, 100% 100%, 0 100%);
+    opacity: 0.9;
+  }
+
+  75% {
+    transform: translateX(25px);
+    clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: translateX(-8px);
+    clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
     opacity: 0.8;
   }
 }
 
-@keyframes glitch-text-hover-2 {
+@keyframes tv-scan-lines-2 {
   0% {
-    transform: translate(2px, -1px);
-    opacity: 0.7;
-  }
-
-  25% {
-    transform: translate(-2px, 1px);
+    transform: translateX(12px);
+    clip-path: polygon(0 0, 100% 0, 100% 25%, 0 25%);
     opacity: 0.8;
   }
 
-  50% {
-    transform: translate(1px, 1px);
+  20% {
+    transform: translateX(-18px);
+    clip-path: polygon(0 25%, 100% 25%, 100% 50%, 0 50%);
+    opacity: 0.9;
+  }
+
+  40% {
+    transform: translateX(8px);
+    clip-path: polygon(0 50%, 100% 50%, 100% 75%, 0 75%);
     opacity: 0.7;
   }
 
-  75% {
-    transform: translate(-1px, -2px);
+  60% {
+    transform: translateX(-22px);
+    clip-path: polygon(0 75%, 100% 75%, 100% 100%, 0 100%);
     opacity: 0.8;
+  }
+
+  80% {
+    transform: translateX(16px);
+    clip-path: polygon(0 0, 100% 0, 100% 40%, 0 40%);
+    opacity: 0.9;
   }
 
   100% {
-    transform: translate(2px, 2px);
-    opacity: 0.7;
+    transform: translateX(-5px);
+    clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
+    opacity: 0.8;
+  }
+}
+
+@keyframes horizontal-split-1 {
+  0% {
+    filter: hue-rotate(0deg) contrast(1.2);
+  }
+
+  25% {
+    filter: hue-rotate(90deg) contrast(1.5);
+  }
+
+  50% {
+    filter: hue-rotate(180deg) contrast(1.8);
+  }
+
+  75% {
+    filter: hue-rotate(270deg) contrast(1.3);
+  }
+
+  100% {
+    filter: hue-rotate(360deg) contrast(1.2);
+  }
+}
+
+@keyframes horizontal-split-2 {
+  0% {
+    filter: hue-rotate(180deg) contrast(1.4);
+  }
+
+  25% {
+    filter: hue-rotate(270deg) contrast(1.1);
+  }
+
+  50% {
+    filter: hue-rotate(0deg) contrast(1.6);
+  }
+
+  75% {
+    filter: hue-rotate(90deg) contrast(1.9);
+  }
+
+  100% {
+    filter: hue-rotate(180deg) contrast(1.4);
   }
 }
 
@@ -471,7 +694,7 @@ body {
   }
 }
 
-/* Enhanced navigation with glitch hover */
+/* 📺 TV STATIC NAVIGATION EFFECTS 📺 */
 .nav-link {
   position: relative;
   overflow: hidden;
@@ -479,8 +702,15 @@ body {
 }
 
 .nav-link:hover {
-  animation: nav-glitch 0.3s linear infinite;
-  text-shadow: -1px -1px 0 #ff0040, 1px 1px 0 #00ff41;
+  animation:
+    nav-tv-static 0.3s linear infinite,
+    nav-horizontal-shift 0.15s linear infinite;
+  text-shadow:
+    -3px 0 0 #ff0040,
+    3px 0 0 #00ff41,
+    0 0 10px rgba(255, 255, 255, 0.5);
+  filter:
+    drop-shadow(0 0 8px rgba(255, 0, 40, 0.8)) contrast(1.4) brightness(1.1);
 }
 
 .nav-link::after {
@@ -496,69 +726,98 @@ body {
 
 .nav-link:hover::after {
   left: 0;
-  animation: line-glitch 0.2s linear infinite;
+  animation: line-tv-interference 0.2s linear infinite;
+  height: 3px;
 }
 
-@keyframes nav-glitch {
+@keyframes nav-tv-static {
+  0% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    transform: translateX(0);
+  }
 
-  0%,
+  25% {
+    clip-path: polygon(0 0, 100% 0, 100% 60%, 0 60%);
+    transform: translateX(-4px);
+  }
+
+  50% {
+    clip-path: polygon(0 40%, 100% 40%, 100% 100%, 0 100%);
+    transform: translateX(6px);
+  }
+
+  75% {
+    clip-path: polygon(0 0, 100% 0, 100% 80%, 0 80%);
+    transform: translateX(-2px);
+  }
+
   100% {
-    transform: translate(0);
-  }
-
-  20% {
-    transform: translate(-1px, 0);
-  }
-
-  40% {
-    transform: translate(1px, 0);
-  }
-
-  60% {
-    transform: translate(0, -1px);
-  }
-
-  80% {
-    transform: translate(0, 1px);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    transform: translateX(0);
   }
 }
 
-@keyframes line-glitch {
+@keyframes nav-horizontal-shift {
+  0% {
+    letter-spacing: 0;
+  }
+
+  50% {
+    letter-spacing: 2px;
+  }
+
+  100% {
+    letter-spacing: 0;
+  }
+}
+
+@keyframes line-tv-interference {
   0% {
     background: linear-gradient(90deg, #ff0040, #00ff41);
+    transform: scaleX(1) translateX(0);
   }
 
   25% {
     background: linear-gradient(90deg, #00ff41, #ff0040);
+    transform: scaleX(1.1) translateX(-3px);
   }
 
   50% {
     background: linear-gradient(90deg, #ffff00, #ff0040);
+    transform: scaleX(0.9) translateX(5px);
   }
 
   75% {
     background: linear-gradient(90deg, #ff0040, #ffff00);
+    transform: scaleX(1.2) translateX(-2px);
   }
 
   100% {
     background: linear-gradient(90deg, #00ff41, #ff0040);
+    transform: scaleX(1) translateX(0);
   }
 }
 
-/* Enhanced social icons with glitch effects */
+/* 💀 KEEP DESTRUCTIVE SOCIAL ICONS 💀 */
 .social-icon {
   position: relative;
   transition: all 0.3s ease;
+  overflow: hidden;
 }
 
 .social-icon:hover {
-  animation: icon-glitch 0.2s linear infinite;
-  transform: scale(1.2) rotate(5deg);
-  filter: drop-shadow(0 0 15px rgba(0, 255, 0, 0.8));
+  animation:
+    icon-destruction 0.4s linear infinite,
+    icon-chaos 0.6s ease-in-out infinite;
+  transform: scale(1.3) rotate(10deg);
+  filter:
+    drop-shadow(0 0 20px rgba(255, 0, 40, 1)) drop-shadow(0 0 30px rgba(0, 255, 0, 0.8)) contrast(1.5) brightness(1.2);
 }
 
 .social-icon:hover svg {
-  animation: svg-glitch 0.3s linear infinite;
+  animation:
+    svg-destruction 0.3s linear infinite,
+    svg-fragment 0.5s ease-out infinite;
 }
 
 .social-icon::before {
@@ -576,74 +835,167 @@ body {
 }
 
 .social-icon:hover::before {
-  width: 40px;
-  height: 40px;
-  animation: glow-pulse 0.3s ease-in-out infinite alternate;
+  width: 50px;
+  height: 50px;
+  animation:
+    glow-destruction 0.3s ease-in-out infinite,
+    chaos-pulse 0.4s linear infinite;
 }
 
-@keyframes icon-glitch {
+@keyframes icon-destruction {
   0% {
-    transform: scale(1.2) rotate(5deg) translate(0, 0);
-    filter: drop-shadow(0 0 15px rgba(0, 255, 0, 0.8));
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    transform: scale(1.3) rotate(10deg);
   }
 
-  25% {
-    transform: scale(1.25) rotate(3deg) translate(-1px, 1px);
-    filter: drop-shadow(2px 2px 15px rgba(255, 0, 40, 0.8));
+  20% {
+    clip-path: polygon(15% 0, 85% 0, 100% 85%, 0 100%);
+    transform: scale(1.4) rotate(5deg) skew(-3deg);
   }
 
-  50% {
-    transform: scale(1.15) rotate(7deg) translate(1px, -1px);
-    filter: drop-shadow(-2px -2px 15px rgba(0, 255, 255, 0.8));
+  40% {
+    clip-path: polygon(0 15%, 100% 0, 85% 100%, 0 85%);
+    transform: scale(1.2) rotate(15deg) skew(4deg);
   }
 
-  75% {
-    transform: scale(1.22) rotate(2deg) translate(-1px, -1px);
-    filter: drop-shadow(1px -1px 15px rgba(255, 255, 0, 0.8));
+  60% {
+    clip-path: polygon(10% 0, 90% 15%, 100% 100%, 15% 85%);
+    transform: scale(1.35) rotate(8deg) skew(-2deg);
+  }
+
+  80% {
+    clip-path: polygon(0 0, 85% 10%, 90% 100%, 10% 90%);
+    transform: scale(1.25) rotate(12deg) skew(5deg);
   }
 
   100% {
-    transform: scale(1.2) rotate(5deg) translate(1px, 1px);
-    filter: drop-shadow(-1px 1px 15px rgba(0, 255, 0, 0.8));
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    transform: scale(1.3) rotate(10deg);
   }
 }
 
-@keyframes svg-glitch {
+@keyframes icon-chaos {
   0% {
-    fill: currentColor;
+    filter:
+      drop-shadow(0 0 20px rgba(255, 0, 40, 1)) drop-shadow(0 0 30px rgba(0, 255, 0, 0.8)) contrast(1.5) brightness(1.2);
+  }
+
+  25% {
+    filter:
+      drop-shadow(5px 5px 25px rgba(0, 255, 255, 1)) drop-shadow(-5px -5px 35px rgba(255, 0, 255, 0.9)) contrast(1.8) brightness(0.8) saturate(2);
+  }
+
+  50% {
+    filter:
+      drop-shadow(-3px 8px 30px rgba(255, 255, 0, 1.2)) drop-shadow(8px -3px 40px rgba(255, 0, 40, 0.7)) contrast(2) brightness(1.5) saturate(1.5);
+  }
+
+  75% {
+    filter:
+      drop-shadow(2px -6px 35px rgba(0, 255, 0, 1.1)) drop-shadow(-8px 2px 45px rgba(0, 255, 255, 0.8)) contrast(1.6) brightness(1.1) saturate(2.2);
+  }
+
+  100% {
+    filter:
+      drop-shadow(0 0 20px rgba(255, 0, 40, 1)) drop-shadow(0 0 30px rgba(0, 255, 0, 0.8)) contrast(1.5) brightness(1.2);
+  }
+}
+
+@keyframes svg-destruction {
+  0% {
     transform: translate(0, 0);
+    fill: currentColor;
   }
 
   25% {
+    transform: translate(-2px, 3px) skew(-8deg);
     fill: #ff0040;
-    transform: translate(-0.5px, 0.5px);
   }
 
   50% {
+    transform: translate(4px, -2px) skew(6deg);
     fill: #00ff41;
-    transform: translate(0.5px, -0.5px);
   }
 
   75% {
+    transform: translate(-1px, -4px) skew(-4deg);
     fill: #ffff00;
-    transform: translate(-0.5px, -0.5px);
   }
 
   100% {
-    fill: currentColor;
-    transform: translate(0.5px, 0.5px);
+    transform: translate(3px, 2px) skew(10deg);
+    fill: #ff0040;
   }
 }
 
-@keyframes glow-pulse {
+@keyframes svg-fragment {
   0% {
-    background: radial-gradient(circle, rgba(0, 255, 0, 0.3), transparent);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    opacity: 1;
+  }
+
+  20% {
+    clip-path: polygon(20% 0, 80% 0, 100% 80%, 0 100%);
+    opacity: 0.9;
+  }
+
+  40% {
+    clip-path: polygon(0 20%, 100% 0, 80% 100%, 0 80%);
+    opacity: 0.8;
+  }
+
+  60% {
+    clip-path: polygon(15% 0, 85% 20%, 100% 100%, 20% 85%);
+    opacity: 0.85;
+  }
+
+  80% {
+    clip-path: polygon(0 0, 100% 15%, 85% 100%, 0 85%);
+    opacity: 0.9;
+  }
+
+  100% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    opacity: 1;
+  }
+}
+
+@keyframes glow-destruction {
+  0% {
+    background: radial-gradient(circle, rgba(255, 0, 40, 0.5), transparent);
     transform: translate(-50%, -50%) scale(1);
   }
 
+  50% {
+    background: radial-gradient(circle, rgba(0, 255, 255, 0.8), rgba(255, 0, 40, 0.3));
+    transform: translate(-50%, -50%) scale(1.5) rotate(180deg);
+  }
+
   100% {
-    background: radial-gradient(circle, rgba(255, 0, 40, 0.5), transparent);
-    transform: translate(-50%, -50%) scale(1.2);
+    background: radial-gradient(circle, rgba(255, 255, 0, 0.6), transparent);
+    transform: translate(-50%, -50%) scale(1.2) rotate(360deg);
+  }
+}
+
+@keyframes chaos-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 40, 0.7);
+  }
+
+  25% {
+    box-shadow: 0 0 0 10px rgba(0, 255, 0, 0);
+  }
+
+  50% {
+    box-shadow: 0 0 0 0 rgba(0, 255, 255, 0.7);
+  }
+
+  75% {
+    box-shadow: 0 0 0 15px rgba(255, 255, 0, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 40, 0.7);
   }
 }
 

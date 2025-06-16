@@ -97,8 +97,8 @@ const App = () => {
               <div className="flex items-center space-x-4">
                 <img
                   alt="Torox Project Logo"
-                  className="h-10 w-10 filter invert transition-transform hover:scale-110"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_kiV_2lVMnyolorBUy8dzV1fwDkhqWdful2g9mJuHkckVbNCgqe7XEkSz0azdCD0y-ieSNE-N0LqauFPK19bgBfM2-pR6OITqEKdvKEWY02m_oAypcJZ3gUaBGbMi67qdu4Rw7_2Opf5xaGUcuu-CtDD_AqcxRSsLZ6x6KKLcocZKKk0UU3_aF7DfpHMWSoiGNTx7p7-AY5TS1wvgBPNsebv4H9cWItmfln3gyS8R8UrPgtMu95GvexM5oFhI5qe_6xbwUur_r70"
+                  className="h-10 w-10 filter  transition-transform hover:scale-110"
+                  src="/logo.svg"
                 />
               </div>
               <a
