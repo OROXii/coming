@@ -1,142 +1,205 @@
-import React from 'react';
-import {
-  FaFacebookF,
-  FaTwitter,
-  FaDiscord,
-  FaInstagram,
-  FaLinkedinIn,
-  FaGithub,
-  FaMedium,
-  FaTelegram
-} from 'react-icons/fa';
-import bgImage from './assets/bg.jpg'; // Import your background image
+import React, { useEffect, useState } from "react";
+import "./App.css";
 
-function App() {
+const App = () => {
+  const [particles, setParticles] = useState([]);
+  const [subtitle, setSubtitle] = useState("");
+  const [charIndex, setCharIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [subtitleIndex, setSubtitleIndex] = useState(0);
+
+  const subtitles = [
+    "// Initializing...",
+    "// Loading awesome features...",
+    "// Preparing something special...",
+    "// Almost ready...",
+    "// Stay tuned for updates...",
+  ];
+
+  // Particle creation effect
+  useEffect(() => {
+    const createParticle = () => {
+      const colors = [
+        "rgba(0, 255, 0, 0.7)",
+        "rgba(255, 0, 40, 0.7)",
+        "rgba(0, 40, 255, 0.7)",
+      ];
+
+      const newParticle = {
+        id: Date.now() + Math.random(),
+        left: Math.random() * 100,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        delay: Math.random() * 15,
+        duration: Math.random() * 10 + 10,
+      };
+
+      setParticles((prev) => [...prev, newParticle]);
+
+      // Remove particle after animation
+      setTimeout(() => {
+        setParticles((prev) => prev.filter((p) => p.id !== newParticle.id));
+      }, 25000);
+    };
+
+    const interval = setInterval(createParticle, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Typing effect
+  useEffect(() => {
+    const timeout = setTimeout(
+      () => {
+        const currentText = subtitles[subtitleIndex];
+
+        if (!isDeleting) {
+          setSubtitle(currentText.substring(0, charIndex + 1));
+          setCharIndex((prev) => prev + 1);
+
+          if (charIndex === currentText.length) {
+            setTimeout(() => setIsDeleting(true), 2000);
+          }
+        } else {
+          setSubtitle(currentText.substring(0, charIndex - 1));
+          setCharIndex((prev) => prev - 1);
+
+          if (charIndex === 0) {
+            setIsDeleting(false);
+            setSubtitleIndex((prev) => (prev + 1) % subtitles.length);
+          }
+        }
+      },
+      isDeleting ? 50 : 100
+    );
+
+    return () => clearTimeout(timeout);
+  }, [charIndex, isDeleting, subtitleIndex, subtitles]);
+
   return (
-    <>
-      <div
-        className="relative min-h-screen bg-cover bg-center"
-        style={{ backgroundImage: `url(${bgImage})` }}
-      >
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black bg-opacity-65 backdrop-blur-sm"></div>
+    <div className="bg-black text-white">
+      <div className="glitch-wrapper">
+        {/* Dynamic particles */}
+        {particles.map((particle) => (
+          <div
+            key={particle.id}
+            className="particle"
+            style={{
+              left: `${particle.left}vw`,
+              animationDelay: `${particle.delay}s`,
+              animationDuration: `${particle.duration}s`,
+              background: particle.color,
+            }}
+          />
+        ))}
 
-        {/* Content */}
-        <div className="relative z-10 flex flex-col min-h-screen">
-          {/* Main Content Container */}
-          <div className="flex flex-col items-center justify-center flex-grow">
-            {/* Logo and Title */}
-            <div className="flex flex-col items-center w-full">
-              <div className="flex items-center w-full max-w-screen-lg my-4">
-                <div className="flex-grow h-1 bg-[#d9d9d9]" />
-                <div className="mx-4 text-white text-[120px] font-[700] font-Bison leading-[86.40px]">
-                  TOROX
-                </div>
-                <div className="flex-grow h-1 bg-[#d9d9d9]" />
+        <div className="content-container flex flex-col min-h-screen">
+          <header className="py-8 px-4 sm:px-8 md:px-16 lg:px-24">
+            <nav className="flex items-center justify-between">
+              <div className="flex items-center space-x-4">
+                <img
+                  alt="Torox Project Logo"
+                  className="h-10 w-10 filter invert transition-transform hover:scale-110"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_kiV_2lVMnyolorBUy8dzV1fwDkhqWdful2g9mJuHkckVbNCgqe7XEkSz0azdCD0y-ieSNE-N0LqauFPK19bgBfM2-pR6OITqEKdvKEWY02m_oAypcJZ3gUaBGbMi67qdu4Rw7_2Opf5xaGUcuu-CtDD_AqcxRSsLZ6x6KKLcocZKKk0UU3_aF7DfpHMWSoiGNTx7p7-AY5TS1wvgBPNsebv4H9cWItmfln3gyS8R8UrPgtMu95GvexM5oFhI5qe_6xbwUur_r70"
+                />
               </div>
-              <div className="text-center text-white font-[600] font-Bison leading-[1.2] max-w-screen-md px-4 text-responsive">
-                Decentralized Web3 Game Engine with P2P Networking, Blockchain
-                Integration, and Advanced Security Features
-              </div>
+              <a
+                className="text-sm font-semibold tracking-widest hover:text-gray-300 transition-colors nav-link"
+                href="#"
+              >
+                CAREERS
+              </a>
+            </nav>
+          </header>
+
+          <main className="flex-grow flex flex-col items-center justify-center text-center px-4">
+            <h1
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight glitch-text"
+              data-text="SOMETHING AWESOME COMING SOON"
+            >
+              SOMETHING
+              <br />
+              AWESOME
+              <br />
+              COMING SOON
+            </h1>
+            <div className="subtitle-container mt-8">
+              <p className="text-lg text-gray-400 typing-effect">{subtitle}</p>
             </div>
+          </main>
 
-            {/* Notification Subscription */}
-            <div className="flex flex-col w-full items-center">
-              <div className="flex flex-col max-w-md w-full">
-                {/* Subtitle */}
-                <div className="text-left text-white font-[400] font-Bison leading-normal mt-10 mb-4 text-[clamp(20px,2vw,32px)]">
-                  Get Notified When We Launch
-                </div>
-
-                {/* Input and Subscribe Button */}
-                <div className="flex items-center w-full">
-                  <input
-                    type="email"
-                    placeholder="E-mail address..."
-                    className="h-12 px-4 py-2 rounded-l-lg shadow-inner text-base font-semibold font-['Outfit'] flex-grow"
+          <footer className="py-8 px-4 sm:px-8">
+            <div className="flex justify-center space-x-6">
+              <a
+                className="text-white hover:text-gray-400 transition-colors social-icon"
+                href="https://github.com/Torox-Labs"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg
+                  aria-hidden="true"
+                  className="h-7 w-7"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    clipRule="evenodd"
+                    d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.483 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.03-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.026 2.747-1.026.546 1.379.201 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.308.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z"
+                    fillRule="evenodd"
                   />
-                  <button className="h-12 px-6 py-2 bg-[#3555fa] text-white text-base font-semibold font-['Outfit'] rounded-r-lg">
-                    Subscribe
-                  </button>
-                </div>
-
-                {/* Agreement Text */}
-                <div className="mt-2 text-sm font-light text-white/90 font-['Outfit'] text-left">
-                  By clicking subscribe you agree to our{' '}
-                  <button className="underline font-semibold">
-                    Terms & Conditions
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Footer */}
-          <footer className="mt-auto w-full">
-            <div className="flex flex-col items-center">
-              {/* Social Icons */}
-              <div className="SocialIcons h-6 flex justify-center items-center gap-6 mb-4">
-                <a
-                  href="https://github.com/Torox-Labs"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                </svg>
+                <span className="sr-only">GitHub</span>
+              </a>
+              <a
+                className="text-white hover:text-gray-400 transition-colors social-icon"
+                href="https://x.com/Torox_org"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg
+                  aria-hidden="true"
+                  className="h-7 w-7"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
                 >
-                  <FaGithub className="w-6 h-6 text-white hover:text-gray-500" />
-                </a>
-                <a
-                  href="https://x.com/Torox_org"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  <path d="M22.46 6c-.77.35-1.6.58-2.46.67.9-.53 1.59-1.37 1.92-2.38-.84.5-1.78.86-2.79 1.07C18.38 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.22-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 01-1.94.07 4.28 4.28 0 004 2.98 8.521 8.521 0 01-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.56 21 7.89 21 16 21 20.48 14.11 20.48 8.03c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.13-2.23z" />
+                </svg>
+                <span className="sr-only">Twitter</span>
+              </a>
+              <a
+                className="text-white hover:text-gray-400 transition-colors social-icon"
+                href="#"
+              >
+                <svg
+                  aria-hidden="true"
+                  className="h-7 w-7"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
                 >
-                  <FaTwitter className="w-6 h-6 text-white hover:text-gray-500" />
-                </a>
-                {/* <a
-                  href="#"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                </svg>
+                <span className="sr-only">LinkedIn</span>
+              </a>
+              <a
+                className="text-white hover:text-gray-400 transition-colors social-icon"
+                href="https://medium.com/@TOROX"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg
+                  aria-hidden="true"
+                  className="h-7 w-7"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
                 >
-                  <FaLinkedinIn className="w-6 h-6 text-white hover:text-gray-500" />
-                </a>
-                <a
-                  href="#"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaTelegram className="w-6 h-6 text-white hover:text-gray-500" />
-                </a>
-                <a
-                  href="#"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaInstagram className="w-6 h-6 text-white hover:text-gray-500" />
-                </a>
-                <a
-                  href="#"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaDiscord className="w-6 h-6 text-white hover:text-gray-500" />
-                </a> */}
-                <a
-                  href="https://medium.com/@TOROX"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaMedium className="w-6 h-6 text-white hover:text-gray-500" />
-                </a>
-              </div>
-
-              {/* Copyright Text */}
-              <div className="text-white text-sm font-normal font-['Poppins'] tracking-tight mb-4">
-                © {new Date().getFullYear()} TOROX | All Rights Reserved
-              </div>
+                  <path d="M12.526 12.51L7.02 1.654H2.087L9.06 14.727L2.086 22.34h13.377l7.497-12.49H12.526zm-1.926 2.07h2.71L20.913 2.99h-2.68L10.6 14.58z" />
+                </svg>
+                <span className="sr-only">Medium</span>
+              </a>
             </div>
           </footer>
         </div>
       </div>
-    </>
+    </div>
   );
-}
+};
 
 export default App;
